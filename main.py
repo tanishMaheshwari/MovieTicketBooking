@@ -11,7 +11,21 @@ import os   #Used to clear the screen
 
 listOfMovies = ['Interstellar', 'Inseption', 'Avengers', 'Pokemon']
 lastDateOfMovies = ['01/01/21', '01/01/21', '01/01/21', '01/01/21']
-tickets = {'movie' : [], 'seat': [], 'price' : [], 'refreshments' : [], 'timing': []}
+seatType = ['Normal', 'Executive']
+timing = ['9:00 a.m.', '12:00 p.m', '3:00 p.m', '6:00 p.m', '9:00 p.m']
+
+seats = [
+    ['X', '♦', '♦', '♦', '♦', '♦', '♦', '♦'],
+    ['♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦'],
+    ['♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦'],
+    ['♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦'],
+    ['♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦'],
+    ['♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦'],
+    ['♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦'],
+    ['♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦']
+]
+
+tickets = {'movie' : [], 'seatType': [], 'seat': [],  'price' : [], 'refreshments' : [], 'timing': []}
 
 
 def printMovies():
@@ -22,6 +36,23 @@ def printMovies():
         print('│', i + 1,'.   │ ', listOfMovies[i], ' ' * (14 - len(listOfMovies[i]) - 1) , '│ ', lastDateOfMovies[i], '  │'  ,sep = '')
 
     print('└─────┴──────────────┴───────────┘')
+
+#**********************************************************************************
+def printSeat():
+    print("     a     b     c     d     e     f     g     h ")
+    print("  ┌" + "─────┬" * 7 + "─────" + "┐" )
+    for i in range(8):
+        print(str(i + 1) + " │", sep = '', end = '')
+        
+        for j in range(8):
+            print(" ", seats[i][j], " │", end = '')
+            
+        if i < 7:
+            print("\n"  + "  ├" + "─────┼" * 7 + "─────" + "┤" )
+        else:
+            print("\n  └" + "─────┴" * 7 + "─────" + "┘" )
+        
+#**********************************************************************************
 #**********************************************************************************
 def signIn():
     user = input("Enter username: ")
@@ -34,25 +65,93 @@ def signIn():
         print("Incorrect Username or Password. Please Try Again\n" + '*' * 30)
         main()
 #**********************************************************************************
+def checkSeat(x):
+    char = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    col = int(char.index(x[0]))
+    row = int(x[1]) - 1
+    #print(row, col)
+    if seats[row][col] == '♦':
+        return True
+    else:
+        return 
+
+
+#=================================================================================
+
+def getTicket(x):
+    
+    x = 0
+    listOfElements = list(tickets.values())
+    l = []
+    for i in range(len(listOfElements)):
+        l.append(listOfElements[i][x])
+    return l
+
+#**********************************************************************************
+
 
 def bookTicket():
         print("List of Movies: \n\n")
         printMovies()
         
         print("Select the Movie: ")
+        
         x = int(input("-> "))
-
-        try:
-            tickets['movie'].append(listOfMovies[x])
-        except:
-            print("Unknown ERROR occured. Please try again")
+        tickets['movie'].append(listOfMovies[x - 1])
+        
         
         print("\n\nSelect Type of seat: \n")
         print("1. Normal    (₹250)")
         print("2. Executive (₹500)")
 
+        x = int(input("-> "))
+        tickets['seatType'].append(seatType[x - 1])
+
+            
 
 
+        print("\n\nSelect Your Seat")
+        print("\nNote: ")
+        print("      ♦:- Available")
+        print("      X:- Not Available\n\n")
+        printSeat()
+
+        x = input("Enter seat(Eg:- g8): ")
+        char = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+        col = int(char.index(x[0]))
+        row = int(x[1]) - 1
+        #print(row, col)
+        if seats[row][col] == '♦':
+            seats[row][col] == 'X'
+            tickets['seat'].append(x)
+            print("\nSeat chosen sucsessfully")
+        else:
+            raise
+
+        print("\n\nDo you want refeshments(popcorn and cola) (Rs 100) y/n")
+        x = input("-> ")
+        if x.lower() == 'y':
+            tickets['refreshments'].append(True)
+        else:
+            tickets['refreshments'].append(False)
+
+        print("\n\nPlease choose the time: ")
+        for i in range(len(timing)):
+            print(str(i+1), '. ', timing[i], sep = '')
+        x = int(input("-> "))
+        tickets['timing'].append(timing[x])
+        tickets['price'].append(0)
+
+        #============================
+        l = getTicket(len(tickets['movie']) - 1)
+
+
+
+
+        print("Your ticket has been booked ☻")
+        print(l)
+        print(len(tickets['movie']))
+        main()
 
 
 
@@ -86,13 +185,9 @@ def main():
 
     if a == 1:
         printMovies()
+        main()
     elif a == 2:
-        print("List of Movies: \n\n")
-        printMovies()
-        
-        print("Select the Movie: ")
-        x = int(input("-> "))
-
+        bookTicket()
         
 
 
@@ -108,10 +203,6 @@ def main():
         print("ERROR: Please enter a valid number\n" + '*' * 30 + '\n')
         main()
 
-'''
-print('Press 3 to edit the available movies')
-print('Press 4 to check and edit movie ticket records')
-'''
 
 
 

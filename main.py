@@ -11,7 +11,7 @@ import os   #Used to clear the screen
 
 listOfMovies = ['Interstellar', 'Inseption', 'Avengers', 'Pokemon']
 lastDateOfMovies = ['01/01/21', '01/01/21', '01/01/21', '01/01/21']
-tickets = {'movie' : [], 'seat': [], 'price' : [], 'refreshments' : []}
+tickets = {'movie' : [], 'seat': [], 'price' : [], 'refreshments' : [], 'timing': []}
 
 
 def printMovies():
@@ -48,7 +48,10 @@ def bookTicket():
             print("Unknown ERROR occured. Please try again")
         
         print("\n\nSelect Type of seat: \n")
-        print("asd")
+        print("1. Normal    (₹250)")
+        print("2. Executive (₹500)")
+
+
 
 
 

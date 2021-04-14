@@ -2,7 +2,6 @@
     Currently only works for windows (Due to os library)
     Currently, CLI only
 
-
 '''
 
 import getpass as gp #Used to input the password
@@ -15,7 +14,7 @@ seatType = ['Normal', 'Executive']
 timing = ['9:00 a.m.', '12:00 p.m', '3:00 p.m', '6:00 p.m', '9:00 p.m']
 
 seats = [
-    ['X', '♦', '♦', '♦', '♦', '♦', '♦', '♦'],
+    ['♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦'],
     ['♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦'],
     ['♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦'],
     ['♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦'],
@@ -78,19 +77,18 @@ def checkSeat(x):
 
 #=================================================================================
 
-def getTicket(x):
-    
-    x = 0
+def getTicket(y):
     listOfElements = list(tickets.values())
     l = []
     for i in range(len(listOfElements)):
-        l.append(listOfElements[i][x])
+        l.append(listOfElements[i][y])
     return l
 
 #**********************************************************************************
 
 
 def bookTicket():
+        x = 0
         print("List of Movies: \n\n")
         printMovies()
         
@@ -107,7 +105,7 @@ def bookTicket():
         x = int(input("-> "))
         tickets['seatType'].append(seatType[x - 1])
 
-            
+             
 
 
         print("\n\nSelect Your Seat")
@@ -122,7 +120,7 @@ def bookTicket():
         row = int(x[1]) - 1
         #print(row, col)
         if seats[row][col] == '♦':
-            seats[row][col] == 'X'
+            seats[row][col] = 'X'
             tickets['seat'].append(x)
             print("\nSeat chosen sucsessfully")
         else:
@@ -139,7 +137,7 @@ def bookTicket():
         for i in range(len(timing)):
             print(str(i+1), '. ', timing[i], sep = '')
         x = int(input("-> "))
-        tickets['timing'].append(timing[x])
+        tickets['timing'].append(timing[x - 1])
         tickets['price'].append(0)
 
         #============================
@@ -149,8 +147,8 @@ def bookTicket():
 
 
         print("Your ticket has been booked ☻")
-        print(l)
         print(len(tickets['movie']))
+        print(l)
         main()
 
 

@@ -1,6 +1,10 @@
 '''
     Currently only works for windows (Due to os library)
     Currently, CLI only
+    
+    Working on adding, deleting and editing records
+    Working on admin functions
+
 
 '''
 
@@ -10,8 +14,9 @@ import os   #Used to clear the screen
 
 listOfMovies = ['Interstellar', 'Inseption', 'Avengers', 'Pokemon']
 lastDateOfMovies = ['01/01/21', '01/01/21', '01/01/21', '01/01/21']
-seatType = ['Normal', 'Executive']
+seatType = ['Normal ( Rs 250 )', 'Executive ( Rs 500 )']
 timing = ['9:00 a.m.', '12:00 p.m', '3:00 p.m', '6:00 p.m', '9:00 p.m']
+theatre =  ['INOX', 'PVR', 'Cinepolis', 'Carnival']
 
 seats = [
     ['♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦'],
@@ -24,7 +29,7 @@ seats = [
     ['♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦']
 ]
 
-tickets = {'movie' : [], 'seatType': [], 'seat': [],  'price' : [], 'refreshments' : [], 'timing': []}
+tickets = {'movie' : [], 'theatre': [], 'timing': [], 'seatType': [], 'seat': [], 'refreshments' : [],  'price' : []}
 
 
 def printMovies():
@@ -84,6 +89,26 @@ def getTicket(y):
         l.append(listOfElements[i][y])
     return l
 
+
+
+def printTicket(l):
+    a = ['Movie', 'Theatre', 'Timings', 'Type of Seat', 'Seat', 'Refreshments', 'Total Price']
+    maxLen = 0
+    for i in range(len(l)):
+        if maxLen < len(str(l[i])):
+            maxLen = len(l[i])
+    print("┌" + "─" * 16, '┬', '─' * (maxLen + 1), '┐', sep = '')
+    
+    for i in range(len(l)):
+        print("│", end  = '', sep = '')
+        print(' ', a[i], ' ' * (12 - len(a[i])), '│' , end = '')
+        print(' ', l[i], ' ' * (maxLen - len(str(l[i]))), '│'   , sep = ''  )
+
+        if i < len(l) - 1:
+            print("├" + '─' * 16 + '┼' + '─' * (maxLen + 1), '┤', sep = '')
+        else:
+            print("└" + '─' * 16 + '┴' + '─' * (maxLen + 1), '┘', sep = '')    
+
 #**********************************************************************************
 
 
@@ -96,11 +121,17 @@ def bookTicket():
         
         x = int(input("-> "))
         tickets['movie'].append(listOfMovies[x - 1])
+
+        print('\n\nSelect the theatre: \n')
+        for i in theatre:
+            print(str(theatre.index(i) + 1), '. ', i, sep = '')
+        x = int(input("\n->"))
+        tickets['theatre'].append(theatre[x - 1])
         
         
         print("\n\nSelect Type of seat: \n")
-        print("1. Normal    (₹250)")
-        print("2. Executive (₹500)")
+        for i in seatType:
+            print(str(seatType.index(i) + 1), '. ', i, sep = '')
 
         x = int(input("-> "))
         tickets['seatType'].append(seatType[x - 1])
@@ -147,8 +178,8 @@ def bookTicket():
 
 
         print("Your ticket has been booked ☻")
-        print(len(tickets['movie']))
-        print(l)
+        #print(len(tickets['movie']))
+        printTicket(l)
         main()
 
 
@@ -157,13 +188,24 @@ def bookTicket():
 
 def adminFunctions():
     print('Press 1 to edit the available movies')
-    print('Press 2 to check and edit movie ticket records')
+    print('Press 2 to edit movie lasr date')
+    print('Press 3 to check movie ticket records')
+    print('Press 4 to edit movie records')
+    print('Press 5 to view and edit seat records')
+    print('Press 6 to go back to Main menu')
+    
     try:
         a = int(input("Enter a number:  "))
     except:
         os.system('cls')
         print("ERROR: Please enter a valid number\n" + '*' * 30 + '\n')
         adminFunctions()
+    if a == 1:
+        print(listOfMovies)
+    elif a == 6:
+        main()
+    
+
 
 #*********************************************************************************
 def main():
@@ -191,7 +233,9 @@ def main():
 
     elif a == 3:
         if signIn():
-            print("Access granted")
+            print("Access granted\n\n")
+            adminFunctions()
+
         
     elif a == 4:
         print("Thank you for using the program ☺☻")

@@ -239,6 +239,14 @@ def adminFunctions():
     elif a == 2:
         print("Do you want to view all records? y/n")
         x = input('-> ')
+        if x.lower() == 'y':
+            #printAllTicket
+            pass
+        elif x.lower() == 'n':
+            print("Which record do you want to see(Enter number): ")
+            y = int(input('-> '))
+            printTicket(getTicket(y - 1))
+
         
 
 

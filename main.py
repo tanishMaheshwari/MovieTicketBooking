@@ -191,15 +191,14 @@ def bookTicket():
 def adminFunctions():
     print('Press 1 to edit the available movies')
     print('Press 2 to check movie ticket records')
-    print('Press 3 to edit movie records')
-    print('Press 4 to view and edit seat records')
-    print('Press 5 to go back to Main menu')
+    print('Press 3 to view and edit seat records')
+    print('Press 4 to go back to Main menu')
     
     try:
         a = int(input("Enter a number:  "))
     except:
         os.system('cls')
-        print("ERROR: Please enter a valid number\n" + '*' * 30 + '\n')
+        print("ERROR: Please enter a valid number\n" + '*' * 30 + '\n\n')
         adminFunctions()
     if a == 1:
         print("Current List of Movies: ")
@@ -217,7 +216,7 @@ def adminFunctions():
             listOfMovies.append(y)
             lastDateOfMovies.append(z)
             print("Movie added sucessfully.")
-            print("\n")
+            print("\n\n")
             adminFunctions()
         elif x == 2:
             print(listOfMovies)
@@ -225,7 +224,8 @@ def adminFunctions():
             y = int(input("->  "))
             listOfMovies.pop(y - 1)
             lastDateOfMovies.pop(y-1)
-            print("Movie removed sucessfully")
+            print("Movie removed sucessfully\n\n")
+            adminFunctions()
         elif x == 3:
             print("Which movie do you want to change the name of(Enter the number):  ")
             y = int(input("-> "))
@@ -235,26 +235,36 @@ def adminFunctions():
             b = input("-> ")
             listOfMovies[y-1] = z
             lastDateOfMovies[y-1] = b
+            print("Movie edited sucessfully\n\n")
+            adminFunctions()
 
     elif a == 2:
         print("Do you want to view all records? y/n")
         x = input('-> ')
         if x.lower() == 'y':
             #printAllTicket
-            pass
+            for i in range(len(tickets['movie'])):
+                printTicket(getTicket(i))
+            
         elif x.lower() == 'n':
             print("Which record do you want to see(Enter number): ")
             y = int(input('-> '))
             printTicket(getTicket(y - 1))
-
+        print('\n\n')
+        adminFunctions()
         
 
 
 
 
 
-    elif a == 6:
+    elif a == 4:
         main()
+    
+    else:
+        print("Please enter a valid number\n\n")
+        print("*" * 30)
+        adminFunctions()
     
 
 

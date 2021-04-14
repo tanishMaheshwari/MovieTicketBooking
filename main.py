@@ -8,6 +8,9 @@
         Working on admin functions
         This is not a thing
 
+
+        IDLE\Class_12_Project\MovieTicketBooking
+
 '''
 
 import getpass as gp #Used to input the password
@@ -253,12 +256,32 @@ def adminFunctions():
         print('\n\n')
         adminFunctions()
         
+    elif a == 3:
+        print("\n\nSelect The Seat")
+        print("\nNote: ")
+        print("      ♦:- Available")
+        print("      X:- Not Available\n\n")
+        printSeat()
 
-
-
+        x = input("Enter seat(Eg:- g8) \n-> ")
+        char = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+        col = int(char.index(x[0]))
+        row = int(x[1]) - 1
+        print("Press 1. to set to available")
+        print('Press 2. to set to booked')
+        y = int(input("-> "))
+        if y == 1:
+            seats[row][col] = '♦'
+            print("Seat", x, "changed to ♦\n\n")
+            adminFunctions()
+        else:
+            seats[row][col] = 'X'
+            print('Seat', x, 'changed to X\n\n')
+            adminFunctions()
 
 
     elif a == 4:
+        print('\n\n')
         main()
     
     else:

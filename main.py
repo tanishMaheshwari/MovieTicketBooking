@@ -2,9 +2,11 @@
     Currently only works for windows (Due to os library)
     Currently, CLI only
     
-    Working on adding, deleting and editing records
-    Working on admin functions
 
+    #Things To Do
+        Working on adding, deleting and editing records
+        Working on admin functions
+        This is not a thing
 
 '''
 
@@ -188,11 +190,10 @@ def bookTicket():
 
 def adminFunctions():
     print('Press 1 to edit the available movies')
-    print('Press 2 to edit movie lasr date')
-    print('Press 3 to check movie ticket records')
-    print('Press 4 to edit movie records')
-    print('Press 5 to view and edit seat records')
-    print('Press 6 to go back to Main menu')
+    print('Press 2 to check movie ticket records')
+    print('Press 3 to edit movie records')
+    print('Press 4 to view and edit seat records')
+    print('Press 5 to go back to Main menu')
     
     try:
         a = int(input("Enter a number:  "))
@@ -201,7 +202,49 @@ def adminFunctions():
         print("ERROR: Please enter a valid number\n" + '*' * 30 + '\n')
         adminFunctions()
     if a == 1:
+        print("Current List of Movies: ")
         print(listOfMovies)
+        print('Press 1 to add records')
+        print('Press 2 to delete records')
+        print('Press 3 to edit records')
+        x = int(input("\n->"))
+
+        if x == 1:
+            print("Enter Movie Name: ")
+            y = input("-> ")
+            print("Enter last date: ")
+            z = input("->")
+            listOfMovies.append(y)
+            lastDateOfMovies.append(z)
+            print("Movie added sucessfully.")
+            print("\n")
+            adminFunctions()
+        elif x == 2:
+            print(listOfMovies)
+            print("Enter the number of movie you want to delete: ")
+            y = int(input("->  "))
+            listOfMovies.pop(y - 1)
+            lastDateOfMovies.pop(y-1)
+            print("Movie removed sucessfully")
+        elif x == 3:
+            print("Which movie do you want to change the name of(Enter the number):  ")
+            y = int(input("-> "))
+            print("Enter name of the movie")
+            z = input("-> ")
+            print("Enter the last date of the movie: ")
+            b = input("-> ")
+            listOfMovies[y-1] = z
+            lastDateOfMovies[y-1] = b
+
+    elif a == 2:
+        print("Do you want to view all records? y/n")
+        x = input('-> ')
+        
+
+
+
+
+
     elif a == 6:
         main()
     

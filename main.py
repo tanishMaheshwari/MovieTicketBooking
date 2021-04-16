@@ -1,12 +1,37 @@
 '''
-    Currently only works for windows (Due to os library)
+    Currently only works for windows (Due to os implementation)
     Currently, CLI only
     
 
     #Things To Do
         Working on adding, deleting and editing records
         Working on admin functions
-        This is not a thing
+        Add User Information
+        Add city
+        Add Movie Details
+
+    Tables
+        1. User Base:- 
+            User ID - int
+            Name - varchar
+            Phone Number - char
+            E-mail - varchar
+            City - carchar
+        2. Ticket Base
+            Movie ID - int  
+            Movie Name - varchar
+            Last date of Movie - char / varchar
+            Seat Type - char
+            Timing - varchar
+            Theatre - varchar
+            City - varchar
+            Refreshment - bool
+        3. Movie Base
+            movie ID - int
+            Movie Base - varchar
+            Last Date of Movie - varchar
+            Base Price - int
+            Movie Details - varchar
 
 
         IDLE\Class_12_Project\MovieTicketBooking
@@ -22,6 +47,8 @@ lastDateOfMovies = ['01/01/21', '01/01/21', '01/01/21', '01/01/21']
 seatType = ['Normal ( Rs 250 )', 'Executive ( Rs 500 )']
 timing = ['9:00 a.m.', '12:00 p.m', '3:00 p.m', '6:00 p.m', '9:00 p.m']
 theatre =  ['INOX', 'PVR', 'Cinepolis', 'Carnival']
+
+
 
 seats = [
     ['♦', '♦', '♦', '♦', '♦', '♦', '♦', '♦'],

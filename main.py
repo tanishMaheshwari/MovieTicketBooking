@@ -9,6 +9,7 @@
         Add User Information
         Add city
         Add Movie Details
+        implement integration with mysql
 
     Tables
         1. User Base:- 
@@ -63,6 +64,11 @@ seats = [
 
 tickets = {'movie' : [], 'theatre': [], 'timing': [], 'seatType': [], 'seat': [], 'refreshments' : [],  'price' : []}
 
+#======================         FUNCTIONS       ==================================================
+#=================================================================================================
+
+#           PRINT FUNCTIONS
+
 
 def printMovies():
     print('┌─────┬──────────────┬───────────┐')
@@ -88,40 +94,8 @@ def printSeat():
         else:
             print("\n  └" + "─────┴" * 7 + "─────" + "┘" )
         
-#**********************************************************************************
-#**********************************************************************************
-def signIn():
-    user = input("Enter username: ")
-    password = gp.getpass(prompt="Enter password: ")
-
-    if user == 'admin' and password == 'admin':
-        return True
-    else:
-        os.system('cls')
-        print("Incorrect Username or Password. Please Try Again\n" + '*' * 30)
-        main()
-#**********************************************************************************
-def checkSeat(x):
-    char = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-    col = int(char.index(x[0]))
-    row = int(x[1]) - 1
-    #print(row, col)
-    if seats[row][col] == '♦':
-        return True
-    else:
-        return 
-
 
 #=================================================================================
-
-def getTicket(y):
-    listOfElements = list(tickets.values())
-    l = []
-    for i in range(len(listOfElements)):
-        l.append(listOfElements[i][y])
-    return l
-
-
 
 def printTicket(l):
     a = ['Movie', 'Theatre', 'Timings', 'Type of Seat', 'Seat', 'Refreshments', 'Total Price']
@@ -140,6 +114,50 @@ def printTicket(l):
             print("├" + '─' * 16 + '┼' + '─' * (maxLen + 1), '┤', sep = '')
         else:
             print("└" + '─' * 16 + '┴' + '─' * (maxLen + 1), '┘', sep = '')    
+
+
+
+
+
+#**********************************************************************************
+#**********************************************************************************
+
+#==============         Book Ticket and Helper Functions        ===================
+
+
+def signIn(): #     Sign in To Admin Account 
+    user = input("Enter username: ")
+    password = gp.getpass(prompt="Enter password: ")
+
+    if user == 'admin' and password == 'admin':
+        return True
+    else:
+        os.system('cls')
+        print("Incorrect Username or Password. Please Try Again\n" + '*' * 30)
+        main()
+#**********************************************************************************
+def checkSeat(x):
+    char = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
+    col = int(char.index(x[0]))
+    row = int(x[1]) - 1
+    #print(row, col)
+    if seats[row][col] == '♦':
+        return True
+    else:
+        return False
+
+
+#=================================================================================
+
+def getTicket(y):
+    listOfElements = list(tickets.values())
+    l = []
+    for i in range(len(listOfElements)):
+        l.append(listOfElements[i][y])
+    return l
+
+
+
 
 #**********************************************************************************
 

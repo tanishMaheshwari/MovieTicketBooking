@@ -33,6 +33,7 @@
             Last Date of Movie - varchar
             Base Price - int
             Movie Details - varchar
+            Tickets Sold - int
 
 
         IDLE\Class_12_Project\MovieTicketBooking
@@ -40,7 +41,7 @@
 '''
 
 import getpass as gp #Used to input the password
-import os   #Used to clear the screen
+import os   #Used to cls the screen
 
 
 listOfMovies = ['Interstellar', 'Inseption', 'Avengers', 'Pokemon']

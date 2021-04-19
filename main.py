@@ -29,7 +29,7 @@
             Refreshment - bool
         3. Movie Base
             movie ID - int
-            Movie Base - varchar
+            Movie name - varchar
             Last Date of Movie - varchar
             Base Price - int
             Movie Details - varchar

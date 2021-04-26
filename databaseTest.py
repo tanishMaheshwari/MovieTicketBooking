@@ -24,6 +24,9 @@
         Added Function createUserRecord()
         Added Function deleteUserRecord()
         
+
+    To D0:
+        adminFunctions a == 2
         
 
 
@@ -166,8 +169,8 @@ def printTicketRecord(ticketID):
     print(record)
 
 
-def createTicketRecord(ticketID, movieID, userID, seatType, timing, theatre, city, refreshment):
-    mycursor.execute("INSERT INTO ticketbase (ticketID, movieID, userID, seatType, timing, theatre, city, refreshment) VALUES (%s, %s, %s, %s, %s, %s, %s)", (ticketID, movieID, userID, seatType, timing, theatre, city, refreshment))
+def createTicketRecord(movieID, userID, seatType, timing, theatre, city, refreshment):
+    mycursor.execute("INSERT INTO ticketbase (movieID, userID, seatType, timing, theatre, city, refreshment) VALUES (%s, %s, %s, %s, %s, %s)", (movieID, userID, seatType, timing, theatre, city, refreshment))
     db.commit()
 
 
@@ -355,6 +358,7 @@ def printUserBase():
 
 
 def adminFunctions():
+    cls()
     printHeader("Admin Menu")
 
     print('Press 1 to view and edit movie records')
@@ -418,10 +422,13 @@ def adminFunctions():
             adminFunctions()
             return 0
 
+    elif a == '2':
+        
+        pass
 
 
 
-    if a == '3':
+    elif a == '3':
         cls()
         printHeader("Edit User Records")
 
@@ -486,7 +493,96 @@ def adminFunctions():
         
         adminFunctions()
         return 0
+#============================================================================
+def bookTicketCheck():
+    printHeader("Booking A Ticket")
+    print("Is this your first time booking a ticket?(y/n)")
+    x = input("-> ")
+    if x.lower() == 'y':
+        cls()
+        printHeader("Registering A User")
         
+        print("Enter name: ")
+        userName = input("-> ")
+
+        print("Enter Age: ")
+        userAge = input("-> ")
+        
+        print("Enter Gender(M/F/O)")
+        userGender = input("-> ").upper()
+
+        print("Enter Phone number: ")
+        userPhone = input("-> ")
+
+        print("Enter e-mail: ")
+        userEmail = input("-> ")
+
+        print("Enter City: ")
+        userCity = input("-> ")
+
+        createUserRecord(userName, userAge, userGender, userPhone, userEmail, userCity)
+
+        cls()
+        print("User Added Sucessfully")
+        bookTicket(id)
+        return 0
+    
+    elif x.lower() == 'n':
+        print("Enter your ID")
+        userID = int(input("-> "))
+        
+        Q = "SELECT name from userbase WHERE userID = " + str(userID)
+        mycursor.execute(Q)
+        cls()
+        print("Welcome, ", mycursor.fetchone()[0], ".", sep = "")
+        printHeader("Booking a Ticket")
+
+        bookTicket(id)
+        return 0
+
+
+def bookTicket(id):
+
+    
+    printMovies()
+    print("Enter Movie ID")
+    movieID = int(input("-> "))
+
+    print("Enter Date: ")
+    movieDate = input("-> ")
+
+    seat = ['Normal', 'Executive', 'Luxury']
+
+    print("Select seat type: ")
+    print("     Press 1 for Normal(Rs. 100)")
+    print("     Press 2 for Executive(Rs 250)")
+    print("     Press 3 for Luxury(Rs 500)")
+
+    movieSeat = int(input("->"))
+
+    print("Enter Start Time: ")
+    movieTiming = input("-> ")
+
+    theatre =  ['INOX', 'PVR', 'Cinepolis', 'Carnival']
+
+    print("Do you want refreshments(y/n): ")
+    refreshment = input("-> ")
+
+    print("Select Theatre: ")
+    for i in range(len(theatre)):
+        print("     Press", i + 1, "for", theatre[i])
+    
+    movieTheatre = int(input("-> "))
+
+    print("Enter City: ")
+    movieCity = input("-> ")
+
+    createTicketRecord(movieID, id, movieSeat, movieTiming, movieTheatre,movieCity, refreshment)
+    return 0
+
+
+
+
 #============================================================================
 
 def mainMenu():
@@ -509,7 +605,7 @@ def mainMenu():
         return 0
 
     elif mainMenuInput == '2':
-        print("Book Ticket")
+        bookTicketCheck()
 
 
     elif mainMenuInput == '3':
@@ -530,19 +626,7 @@ def mainMenu():
         print("Please enter a valid input \n" + "*" * 25)
         mainMenu()
         return 0
-#printUserRecord(1)
 
 #=======            DRIVER CODE         =======
-cls()
-#mainMenu()
-
-#printHeader("This is a test Header")
-
-#printMovies()
-cls()
-
-#printMovieBase()
-
-#printUserBase()
 
 mainMenu()

@@ -5,6 +5,7 @@
     To D0:
         adminFunctions ticketbase
         printTicketBase()
+        Line 406
         
 
 
@@ -740,7 +741,13 @@ def mainMenu():
 
 #printMovieBase()
 
-printTicketBase()
+#printTicketBase()
+
+#printAllTicketRecord()
+
+
+mainMenu()
+
 
 '''
             CODE REPO

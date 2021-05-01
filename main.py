@@ -1,32 +1,10 @@
 '''
 
     NOTE: Works on Windows ONLY
-    Things Done:
-        added tanish as a user with password admin
-
-        granted user 'tanish' all privlages to 'movieticketbooking' database
-            done using GRANT all privileges ON movieticketbooking TO 'tanish';
-        
-        Created userbase table 
-
-        To add Records:
-            mycursor.execute("INSERT INTO userbase (name, phonenumber, email, city) VALUES (%s, %s, %s, %s)", ("Tanish", '9876543210', 'user@example.com', 'new delhi'))
-            db.commit()
-
-        To fetch Records:
-            mycursor.execute("SELECT * FROM userbase")
-            for i in mycursor:
-                print(i)
-
-        Added Function PrintAllUserRecord()
-        Added Function PrintUserRecord()
-        Added Function editUserRecord()
-        Added Function createUserRecord()
-        Added Function deleteUserRecord()
-        
-
+    
     To D0:
-        adminFunctions a == 2
+        adminFunctions ticketbase
+        printTicketBase()
         
 
 

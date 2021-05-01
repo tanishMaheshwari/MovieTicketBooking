@@ -291,7 +291,7 @@ def printMovieBase():
     print('│S.no │ Movie Name' + ' ' * (maxMovieLen - 14 + 1) + '  │  Last Date  │ Base Price │ Tickets Sold' + ' ' * (maxTicketLength - 14 + 1) + '│')
     print('├' + '─' * 5 + '┼' + '─' * maxMovieLen + '┼' + '─' * 13 + '┼' + '─' * 12 + '┼' + '─' * 14 +'┤')
     for i in range(len(listOfMovies)):
-        print('│', idOfMovies[i],'.   │ ', listOfMovies[i], ' ' * (maxMovieLen - len(listOfMovies[i]) - 1) , '│ ', lastDateOfMovies[i], '  │ ' , basePriceOfMovies[i], ' ' * (12 - len(str(basePriceOfMovies[i])) - 2), ' │ ', ticketSoldOfMovies[i],' ' * (maxTicketLength - ticketSoldOfMovies[i] - 2),  '│ ' ,sep = '')
+        print('│', idOfMovies[i],'.   │ ', listOfMovies[i], ' ' * (maxMovieLen - len(listOfMovies[i]) - 1) , '│ ', lastDateOfMovies[i], '  │ ' , basePriceOfMovies[i], ' ' * (12 - len(str(basePriceOfMovies[i])) - 2), ' │ ', ticketSoldOfMovies[i],' ' * (maxTicketLength - len(str(ticketSoldOfMovies[i])) - 1),  '│ ' ,sep = '')
 
     print('└' + '─' * 5 + '┴' + '─' * maxMovieLen + '┴' + '─' * 13 + '┴' + '─' * 12 + '┴' + '─' * maxTicketLength +'┘')
     
@@ -344,14 +344,14 @@ def printUserBase():
 
     print(listOfUsers)
     #Print
-    print('┌' + '─' * 5 + '┬' + '─' * maxNameLen + '┬' + '─' * 7 + '┬' + '─' * 8 + '┬' + '─' * 14 + '┬' + '─' * (maxEmailLen) + '┬' + '─' * maxCityLen    +'┐')
-    print('│S.no │ Name' + ' ' * (maxNameLen - 7 ) + '  │  Age  │ Gender │ Phone Number | email' + ' ' * (maxEmailLen - 7 + 1) + '│ city' + " " * (maxCityLen - 6 + 1) + "|")
+    print('┌' + '─' * 5 + '┬' + '─' * (maxNameLen + 2) + '┬' + '─' * 7 + '┬' + '─' * 8 + '┬' + '─' * 14 + '┬' + '─' * (maxEmailLen) + '┬' + '─' * maxCityLen    +'┐')
+    print('│S.no │ Name' + ' ' * (maxNameLen - 7 + 2 ) + '  │  Age  │ Gender │ Phone Number | email' + ' ' * (maxEmailLen - 7 + 1) + '│ city' + " " * (maxCityLen - 6 + 1) + "|")
     
-    print('├' + '─' * 5 + '┼' + '─' * maxNameLen + '┼' + '─' * 7 + '┼' + '─' * 8 + '┼' + '─' * 14 + '┼' + '─' * (maxEmailLen) + '┼' + '─' * maxCityLen    +'┤')
+    print('├' + '─' * 5 + '┼' + '─' * (maxNameLen + 2) + '┼' + '─' * 7 + '┼' + '─' * 8 + '┼' + '─' * 14 + '┼' + '─' * (maxEmailLen) + '┼' + '─' * maxCityLen    +'┤')
     for i in range(len(listOfUsers)):
-        print('│', idOfUsers[i],'.   │ ', listOfUsers[i], ' ' * (maxNameLen - len(listOfUsers[i]) - 1) , '│  ', ageOfUsers[i], '   │   ', genderOfUsers[i],  '    │  ', phoneNumberOfUsers[i], '  │ ', emailOfUsers[i], ' ' * (maxEmailLen - len(emailOfUsers[i] ) - 2), ' │ ', cityOfUsers[i],' ' * (maxCityLen - len(cityOfUsers[i]) - 1), "│" ,sep = '')
+        print('│', idOfUsers[i],'.   │ ', listOfUsers[i], ' ' * (maxNameLen - len(listOfUsers[i])  + 1) , '│  ', ageOfUsers[i], '   │   ', genderOfUsers[i],  '    │  ', phoneNumberOfUsers[i], '  │ ', emailOfUsers[i], ' ' * (maxEmailLen - len(emailOfUsers[i] ) - 2), ' │ ', cityOfUsers[i],' ' * (maxCityLen - len(cityOfUsers[i]) - 1), "│" ,sep = '')
 
-    print('└' + '─' * 5 + '┴' + '─' * maxNameLen + '┴' + '─' * 7 + '┴' + '─' * 8 + '┴' + '─' * 14 + '┴' + '─' * (maxEmailLen) + '┴' + '─' * maxCityLen    +'┘')
+    print('└' + '─' * 5 + '┴' + '─' * (maxNameLen + 2) + '┴' + '─' * 7 + '┴' + '─' * 8 + '┴' + '─' * 14 + '┴' + '─' * (maxEmailLen) + '┴' + '─' * maxCityLen    +'┘')
     
     
 
@@ -415,7 +415,18 @@ def printTicketBase():
         Q = "SELECT name FROM moviebase WHERE movieID = " + str(ID)
         mycursor.execute(Q)
         Movies.append(mycursor.fetchone()[0])
-    print(Users, Movies)
+
+
+    maxMovieLen = 14
+    #for i in range(len())
+
+
+    
+    print(Users, Movies, refreshment)
+
+    print('┌' + '─' * 5)
+    print('│S.No │ Name ')
+
 
 
 
@@ -499,9 +510,42 @@ def adminFunctions():
             print("Returning From Edit Movie Records")
             adminFunctions()
             return 0
+        else:
+            cls()
+            print("INVAID INPUT. Please Try Again")
+            adminFunctions()
+            return 0
 
     elif a == '2':
+        cls()
+        printHeader("Edit Ticket Records")
+
+        print("Ticket Base: ")
+        printTicketBase()
+        print('Press 1 to add records')
+        print('Press 2 to delete records')
+        print('Press 3 to edit records')
+        print("Press 4. to go back ")
+        x = int(input("\n->"))
         
+        if x == 1:
+            print("Enter details in the following format: ")
+            print("(<name>, <age>, <gender>, <phone number>, <email>, <city>)")
+            y = eval(input("-> "))
+
+            createUserRecord(y[0], y[1], y[2], y[3], y[4], y[5])
+            cls()
+            print("User added sucessfully.")
+            adminFunctions()
+            return 0
+
+        elif x == 2:
+            pass
+        elif x == 3:
+            pass
+        elif x  == 4:
+            pass
+
         pass
 
 
@@ -556,6 +600,11 @@ def adminFunctions():
         elif x == 4:
             cls()
             print("Returning From Edit User Records")
+            adminFunctions()
+            return 0
+        else:
+            cls()
+            print("INVALID INPUT. Please Try Again")
             adminFunctions()
             return 0
 
@@ -709,9 +758,11 @@ def mainMenu():
 
 #mainMenu()
 
+#printUserBase()
+
+#printMovieBase()
 
 printTicketBase()
-
 
 '''
             CODE REPO

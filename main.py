@@ -342,6 +342,7 @@ def printUserBase():
             maxCityLen   = len(cityOfUsers[i]) + 2
         
 
+    print(listOfUsers)
     #Print
     print('┌' + '─' * 5 + '┬' + '─' * maxNameLen + '┬' + '─' * 7 + '┬' + '─' * 8 + '┬' + '─' * 14 + '┬' + '─' * (maxEmailLen) + '┬' + '─' * maxCityLen    +'┐')
     print('│S.no │ Name' + ' ' * (maxNameLen - 7 ) + '  │  Age  │ Gender │ Phone Number | email' + ' ' * (maxEmailLen - 7 + 1) + '│ city' + " " * (maxCityLen - 6 + 1) + "|")
@@ -354,7 +355,84 @@ def printUserBase():
     
     
 
+#===============================================================================================================
 
+
+def printTicketBase():
+    
+    #==========get keys
+    mycursor.execute("SELECT ticketID FROM ticketbase")
+    ticketID = list(mycursor)
+    ticketID = [ticketID[i][0] for i in range(len(ticketID)) ]
+
+    mycursor.execute("SELECT movieID FROM ticketbase")
+    movieID = list(mycursor)
+    movieID = [movieID[i][0] for i in range(len(movieID)) ]
+
+    mycursor.execute("SELECT userID FROM ticketbase")
+    userID = list(mycursor)
+    userID = [userID[i][0] for i in range(len(userID)) ]
+
+
+    mycursor.execute("SELECT seatType FROM ticketbase")
+    seatType = list(mycursor)
+    seatType = [seatType[i][0] for i in range((len(seatType)))]
+
+    mycursor.execute("SELECT movieDate FROM ticketbase")
+    movieDate = list(mycursor)
+    movieDate = [movieDate[i][0] for i in range((len(movieDate)))]
+
+    mycursor.execute("SELECT timing FROM ticketbase")
+    timing = list(mycursor)
+    timing = [timing[i][0] for i in range((len(timing)))]
+
+    mycursor.execute("SELECT theatre FROM ticketbase")
+    theatre = list(mycursor)
+    theatre = [theatre[i][0] for i in range((len(theatre)))]
+
+    mycursor.execute("SELECT city FROM ticketbase")
+    city = list(mycursor)
+    city = [city[i][0] for i in range((len(city)))]
+
+    mycursor.execute("SELECT refreshment FROM ticketbase")
+    refreshment = list(mycursor)
+    refreshment = [refreshment[i][0] for i in range((len(refreshment)))]
+
+    Users = []
+    for i in range(len(userID)):
+        Q = "SELECT userID FROM ticketbase WHERE ticketID = " + str(i + 1)
+        mycursor.execute(Q)
+        ID = mycursor.fetchone()[0]
+        Q = "SELECT name FROM userbase WHERE userID = " + str(ID)
+        mycursor.execute(Q)
+        Users.append(mycursor.fetchone()[0])
+
+    Movies = []
+    for i in range(len(movieID)):
+        Q = "SELECT movieID FROM ticketbase WHERE ticketID = " + str(i + 1)
+        mycursor.execute(Q)
+        ID = mycursor.fetchone()[0]
+        Q = "SELECT name FROM moviebase WHERE movieID = " + str(ID)
+        mycursor.execute(Q)
+        Movies.append(mycursor.fetchone()[0])
+    print(Users, Movies)
+
+
+
+
+'''
+    #Print
+    print('┌' + '─' * 5 + '┬' + '─' * maxNameLen + '┬' + '─' * 7 + '┬' + '─' * 8 + '┬' + '─' * 14 + '┬' + '─' * (maxEmailLen) + '┬' + '─' * maxCityLen    +'┐')
+    print('│S.no │ Name' + ' ' * (maxNameLen - 7 ) + '  │  Age  │ Gender │ Phone Number | email' + ' ' * (maxEmailLen - 7 + 1) + '│ city' + " " * (maxCityLen - 6 + 1) + "|")
+    
+    print('├' + '─' * 5 + '┼' + '─' * maxNameLen + '┼' + '─' * 7 + '┼' + '─' * 8 + '┼' + '─' * 14 + '┼' + '─' * (maxEmailLen) + '┼' + '─' * maxCityLen    +'┤')
+    for i in range(len(listOfUsers)):
+        print('│', idOfUsers[i],'.   │ ', listOfUsers[i], ' ' * (maxNameLen - len(listOfUsers[i]) - 1) , '│  ', ageOfUsers[i], '   │   ', genderOfUsers[i],  '    │  ', phoneNumberOfUsers[i], '  │ ', emailOfUsers[i], ' ' * (maxEmailLen - len(emailOfUsers[i] ) - 2), ' │ ', cityOfUsers[i],' ' * (maxCityLen - len(cityOfUsers[i]) - 1), "│" ,sep = '')
+
+    print('└' + '─' * 5 + '┴' + '─' * maxNameLen + '┴' + '─' * 7 + '┴' + '─' * 8 + '┴' + '─' * 14 + '┴' + '─' * (maxEmailLen) + '┴' + '─' * maxCityLen    +'┘')
+    
+
+'''
 
 
 def adminFunctions():
@@ -629,8 +707,10 @@ def mainMenu():
 
 #=======            DRIVER CODE         =======
 
-mainMenu()
+#mainMenu()
 
+
+printTicketBase()
 
 
 '''

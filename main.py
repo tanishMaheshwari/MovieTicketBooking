@@ -18,17 +18,13 @@ print()
 print("Date: ", datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
 
 print("\n" + "*" * 25 )
-"""
+
 print("Enter server IP: ")
 ip = input("-> ")
 print("Enter username: ")
 userName = input("-> ")
 print("Enter password: \n->", end='')
 password = gp.getpass(prompt='')
-"""
-ip = 'localhost'
-userName = 'tanish'
-password = 'admin'
 
 
 try:

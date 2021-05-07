@@ -3,10 +3,7 @@
     NOTE: Works on Windows ONLY
     
     To D0:
-        adminFunctions ticketbase
-        printTicketBase()
-        Line 406
-        
+        Looking For Bugs
 
 
 '''
@@ -396,33 +393,53 @@ def printTicketBase():
         Movies.append(mycursor.fetchone()[0])
 
 
-    maxMovieLen = 14
-    #for i in range(len())
 
-
-    
-    print(Users, Movies, refreshment)
-
-    print('┌' + '─' * 5)
-    print('│S.No │ Name ')
-
-
-
-
-
-'''
-    #Print
-    print('┌' + '─' * 5 + '┬' + '─' * maxNameLen + '┬' + '─' * 7 + '┬' + '─' * 8 + '┬' + '─' * 14 + '┬' + '─' * (maxEmailLen) + '┬' + '─' * maxCityLen    +'┐')
-    print('│S.no │ Name' + ' ' * (maxNameLen - 7 ) + '  │  Age  │ Gender │ Phone Number | email' + ' ' * (maxEmailLen - 7 + 1) + '│ city' + " " * (maxCityLen - 6 + 1) + "|")
-    
-    print('├' + '─' * 5 + '┼' + '─' * maxNameLen + '┼' + '─' * 7 + '┼' + '─' * 8 + '┼' + '─' * 14 + '┼' + '─' * (maxEmailLen) + '┼' + '─' * maxCityLen    +'┤')
-    for i in range(len(listOfUsers)):
-        print('│', idOfUsers[i],'.   │ ', listOfUsers[i], ' ' * (maxNameLen - len(listOfUsers[i]) - 1) , '│  ', ageOfUsers[i], '   │   ', genderOfUsers[i],  '    │  ', phoneNumberOfUsers[i], '  │ ', emailOfUsers[i], ' ' * (maxEmailLen - len(emailOfUsers[i] ) - 2), ' │ ', cityOfUsers[i],' ' * (maxCityLen - len(cityOfUsers[i]) - 1), "│" ,sep = '')
-
-    print('└' + '─' * 5 + '┴' + '─' * maxNameLen + '┴' + '─' * 7 + '┴' + '─' * 8 + '┴' + '─' * 14 + '┴' + '─' * (maxEmailLen) + '┴' + '─' * maxCityLen    +'┘')
+    maxMovieLen = 12
+    for i in range(len(Movies)):
+        if len(Movies[i]) > maxMovieLen:
+            maxMovieLen = len(Movies[i]) + 2
     
 
-'''
+    
+    maxNameLen = 6
+    for i in range(len(Users)):
+        if len(Users[i]) > maxNameLen:
+            maxNameLen = len(Users[i]) + 2
+
+
+    maxSeatLen = 6
+    for i in range(len(seatType)):
+        if len(seatType[i]) > maxSeatLen:
+            maxSeatLen = len(seatType[i]) + 2
+    
+    maxDateLen = 10
+
+    maxTimingLen = 10
+
+    maxTheatreLen = 9
+    for i in range(len(theatre)):
+        if len(theatre[i]) > maxTheatreLen:
+            maxTheatreLen = len(theatre[i]) + 2
+
+    maxCityLen = 6
+    for i in range(len(city)):
+        if len(city[i]) > maxCityLen:
+            maxCityLen = len(city[i]) + 2
+    
+    maxRefreshmentLen = 1
+
+    
+
+    
+    
+    print('┌──────┬' + '─' * (maxNameLen + 2) + '┬' + '─' * maxMovieLen + '┬' + '─' * maxSeatLen + '┬' + '─' * maxDateLen + '┬' + '─' * 10 + '┬' + '─' * maxTheatreLen + '┬' + '─' * maxCityLen + '┬' + '─' * 14 + '┐')
+    print('│ S.No │ Name' + ' ' * (maxNameLen - 4) + ' | Movie Name' + ' ' * (maxMovieLen - 12) +  ' | Seat Type' + ' ' * (maxSeatLen - 11) + ' | Date     | Timing   | Theatre' + ' ' * (maxTheatreLen - 9) + ' | City' + ' ' * (maxCityLen - 6) + ' | Refreshments |')
+
+    for i in range(len(Users)):
+        print('├──────┼' + '─' * (maxNameLen + 2) + '┼' + '─' * maxMovieLen + '┼' + '─' * maxSeatLen + '┼' + '─' * maxDateLen + '┼' + '─' * 10 + '┼' + '─' * maxTheatreLen + '┼' + '─' * maxCityLen + '┼' + '─' * 14 + '┤')
+        print('| ' + str(i + 1) + ' ' * (4 - len(str(i + 1))) + ' | ' + str(Users[i]) + ' ' * (maxNameLen - len(str(Users[i]))) + ' | ' + Movies[i] + ' ' * (maxMovieLen - len(str(Movies[i])) - 2) + ' | ' + str(seatType[i]) + ' ' * (maxSeatLen - len(str(seatType[i])) - 2) + ' | ' + str(movieDate[i]) + ' ' * (maxDateLen - len(str(movieDate[i])) - 2) + ' | ' + str(timing[i]) + ' ' * (maxTimingLen - len(str(timing[i])) - 2) + '| ' + str(theatre[i]) + ' ' * (maxTheatreLen - len(str(theatre[i])) - 2) + ' | ' + str(city[i]) + ' ' * (maxCityLen - len(str(city[i])) - 2) + ' | ' + str(refreshment[i]) + ' ' * 11 + ' | ')
+
+    print('└──────┴' + '─' * (maxNameLen + 2) + '┴' + '─' * maxMovieLen + '┴' + '─' * maxSeatLen + '┴' + '─' * maxDateLen + '┴' + '─' * 10 + '┴' + '─' * maxTheatreLen + '┴' + '─' * maxCityLen + '┴' + '─' * 14 + '┘')
 
 
 def adminFunctions():
@@ -514,18 +531,36 @@ def adminFunctions():
 
             createUserRecord(y[0], y[1], y[2], y[3], y[4], y[5])
             cls()
-            print("User added sucessfully.")
+            print("Ticket Record added sucessfully.")
             adminFunctions()
             return 0
 
         elif x == 2:
-            pass
+            print("Enter Record Number: ")
+            y = int(input("-> "))
+            deleteTicketRecord(y)
+            cls()
+            print("Record Deleted Sucessfully")
+            adminFunctions()
+            return 0
         elif x == 3:
-            pass
+            print("Enter Record Number: ")
+            y = int(input("-> "))
+            print("Enter Field: ")
+            z = input("-> ")
+            print("Enter Value: ")
+            aa = input("-> ")
+            editTicketRecord(y, z, aa)
+            cls()
+            print("Record Edited Sucessfully")
+            adminFunctions()
+            return 0
         elif x  == 4:
-            pass
+            cls()
+            adminFunctions()
+            return 0
 
-        pass
+        
 
 
 
@@ -628,8 +663,10 @@ def bookTicketCheck():
 
         createUserRecord(userName, userAge, userGender, userPhone, userEmail, userCity)
 
+        mycursor.execute("SELECT userID FROM userbase")
         cls()
         print("User Added Sucessfully")
+        print("IMPORTANT: Your User ID is", mycursor.fetchall()[-1][0])
         bookTicket(id)
         return 0
     
@@ -735,18 +772,8 @@ def mainMenu():
 
 #=======            DRIVER CODE         =======
 
-#mainMenu()
-
-#printUserBase()
-
-#printMovieBase()
-
-#printTicketBase()
-
-#printAllTicketRecord()
-
-
 mainMenu()
+
 
 
 '''

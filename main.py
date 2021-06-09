@@ -442,7 +442,6 @@ def printTicketBase():
 
 
 def adminFunctions():
-    cls()
     printHeader("Admin Menu")
 
     print('Press 1 to view and edit movie records')
@@ -468,38 +467,57 @@ def adminFunctions():
         if x == 1:
             print("Enter details in the following format: ")
             print("(<name>, <last date>, <base price>, <datails>, <tickets sold>)")
-            y = eval(input("-> "))
+            try:
+                y = eval(input("-> "))
 
-            createMovieRecord(y[0], y[1], y[2], y[3], y[4])
-            cls()
-            print("Movie added sucessfully.")
-            adminFunctions()
-            return 0
+                createMovieRecord(y[0], y[1], y[2], y[3], y[4])
+                cls()
+                print("Movie added sucessfully.")
+                adminFunctions()
+                return 0
+            except:
+                cls()
+                print("invalid Input. Please try again.")
+                adminFunctions()
+                return 0
             
         elif x == 2:
             print("Enter S.No of the Movie record you want to delete")
-            y = int(input("-> "))
-            Q = "DELETE FROM moviebase WHERE movieID = '" + str(y) + "'"
-            mycursor.execute(Q)
+            try:
+                y = int(input("-> "))
+                Q = "DELETE FROM moviebase WHERE movieID = '" + str(y) + "'"
+                mycursor.execute(Q)
 
-            cls()
-            print("Record deleted sucessfully")
-            adminFunctions()
-            return 0
+                cls()
+                print("Record deleted sucessfully")
+                adminFunctions()
+                return 0
+            except:
+                cls()
+                print("Something went wrong. Please try again.")
+                adminFunctions()
+                return 0
+            
         elif x == 3:
-            print("Enter S.No of the Movie record you want to edit")
-            y = int(input("-> "))
-            print("Which field do you want to edit Eg: age")
-            z = input("-> ")
-            print("Enter New Value")
-            g = input("-> ")
+            try:
+                print("Enter S.No of the Movie record you want to edit")
+                y = int(input("-> "))
+                print("Which field do you want to edit Eg: age")
+                z = input("-> ")
+                print("Enter New Value")
+                g = input("-> ")
 
 
-            editMovieRecord(y, z, g)
-            cls()
-            print("Record edited Sucessfully")
-            adminFunctions()
-            return 0
+                editMovieRecord(y, z, g)
+                cls()
+                print("Record edited Sucessfully")
+                adminFunctions()
+                return 0
+            except:
+                cls()
+                print("Something went wrong. Please try again.")
+                adminFunctions()
+                return 0
         elif x == 4:
             cls()
             print("Returning From Edit Movie Records")
@@ -526,34 +544,53 @@ def adminFunctions():
         if x == 1:
             print("Enter details in the following format: ")
             print("(<name>, <age>, <gender>, <phone number>, <email>, <city>)")
-            y = eval(input("-> "))
+            print("NOTE: put strings in ''") 
+            try:
+                y = eval(input("-> "))
 
-            createUserRecord(y[0], y[1], y[2], y[3], y[4], y[5])
-            cls()
-            print("Ticket Record added sucessfully.")
-            adminFunctions()
-            return 0
+                createUserRecord(y[0], y[1], y[2], y[3], y[4], y[5])
+                cls()
+                print("Ticket Record added sucessfully.")
+                adminFunctions()
+                return 0
+            except:
+                cls()
+                print("Invalid Input. Please try again.")
+                adminFunctions()
+                return 0
 
         elif x == 2:
             print("Enter Record Number: ")
-            y = int(input("-> "))
-            deleteTicketRecord(y)
-            cls()
-            print("Record Deleted Sucessfully")
-            adminFunctions()
-            return 0
+            try:
+                y = int(input("-> "))
+                deleteTicketRecord(y)
+                cls()
+                print("Record Deleted Sucessfully")
+                adminFunctions()
+                return 0
+            except:
+                cls()
+                print("Invalid input.")
+                adminFunctions()
+                return 0
         elif x == 3:
-            print("Enter Record Number: ")
-            y = int(input("-> "))
-            print("Enter Field: ")
-            z = input("-> ")
-            print("Enter Value: ")
-            aa = input("-> ")
-            editTicketRecord(y, z, aa)
-            cls()
-            print("Record Edited Sucessfully")
-            adminFunctions()
-            return 0
+            try:
+                print("Enter Record Number: ")
+                y = int(input("-> "))
+                print("Enter Field: ")
+                z = input("-> ")
+                print("Enter Value: ")
+                aa = input("-> ")
+                editTicketRecord(y, z, aa)
+                cls()
+                print("Record Edited Sucessfully")
+                adminFunctions()
+                return 0
+            except:
+                cls()
+                print("Invalid Input.")
+                adminFunctions()
+                return 0
         elif x  == 4:
             cls()
             adminFunctions()
@@ -576,40 +613,56 @@ def adminFunctions():
         x = int(input("\n->"))
 
         if x == 1:
-            print("Enter details in the following format: ")
-            print("(<name>, <age>, <gender>, <phone number>, <email>, <city>)")
-            y = eval(input("-> "))
+            try:
+                print("Enter details in the following format: ")
+                print("(<name>, <age>, <gender>, <phone number>, <email>, <city>)")
+                y = eval(input("-> "))
 
-            createUserRecord(y[0], y[1], y[2], y[3], y[4], y[5])
-            cls()
-            print("User added sucessfully.")
-            adminFunctions()
-            return 0
-            
+                createUserRecord(y[0], y[1], y[2], y[3], y[4], y[5])
+                cls()
+                print("User added sucessfully.")
+                adminFunctions()
+                return 0
+            except:
+                cls()
+                print("Invalid input.") 
+                adminFunctions()
+                return 0    
         elif x == 2:
-            print("Enter S.No of the User record you want to delete")
-            y = int(input("-> "))
-            Q = "DELETE FROM userbase WHERE userID = '" + str(y) + "'"
-            mycursor.execute(Q)
+            try:
+                print("Enter S.No of the User record you want to delete")
+                y = int(input("-> "))
+                Q = "DELETE FROM userbase WHERE userID = '" + str(y) + "'"
+                mycursor.execute(Q)
+                db.commit()
 
-            cls()
-            print("Record deleted sucessfully")
-            adminFunctions()
-            return 0
+                cls()
+                print("Record deleted sucessfully")
+                adminFunctions()
+                return 0
+            except:
+                cls()
+                print("Invalid Input")
+                adminFunctions()
+                return 0
         elif x == 3:
-            print("Enter S.No of the User record you want to edit")
-            y = int(input("-> "))
-            print("Which field do you want to edit Eg: age")
-            z = input("-> ")
-            print("Enter New Value")
-            g = input("-> ")
-
-
-            editUserRecord(y, z, g)
-            cls()
-            print("Record edited Sucessfully")
-            adminFunctions()
-            return 0
+            try:
+                print("Enter S.No of the User record you want to edit")
+                y = int(input("-> "))
+                print("Which field do you want to edit Eg: age")
+                z = input("-> ")
+                print("Enter New Value")
+                g = input("-> ")
+                editUserRecord(y, z, g)
+                cls()
+                print("Record edited Sucessfully")
+                adminFunctions()
+                return 0
+            except:
+                cls()
+                print("Invalid Input")
+                adminFunctions()
+                return 0
         elif x == 4:
             cls()
             print("Returning From Edit User Records")
@@ -636,92 +689,110 @@ def adminFunctions():
 #============================================================================
 def bookTicketCheck():
     printHeader("Booking A Ticket")
-    print("Is this your first time booking a ticket?(y/n)")
-    x = input("-> ")
-    if x.lower() == 'y':
-        cls()
-        printHeader("Registering A User")
+    try:
+        print("Is this your first time booking a ticket?(y/n)")
+        x = input("-> ")
+        if x.lower() == 'y':
+            cls()
+            printHeader("Registering A User")
+            
+            print("Enter name: ")
+            userName = input("-> ")
+
+            print("Enter Age: ")
+            userAge = input("-> ")
+            
+            print("Enter Gender(M/F/O)")
+            userGender = input("-> ").upper()
+
+            print("Enter Phone number: ")
+            userPhone = input("-> ")
+
+            print("Enter e-mail: ")
+            userEmail = input("-> ")
+
+            print("Enter City: ")
+            userCity = input("-> ")
+
+            createUserRecord(userName, userAge, userGender, userPhone, userEmail, userCity)
+
+            mycursor.execute("SELECT userID FROM userbase")
+            cls()
+            print("User Added Sucessfully")
+            print("IMPORTANT: Your User ID is", mycursor.fetchall()[-1][0])
+            bookTicket(id)
+            return 0
         
-        print("Enter name: ")
-        userName = input("-> ")
+        elif x.lower() == 'n':
+            print("Enter your ID")
+            userID = int(input("-> "))
+            
+            Q = "SELECT name from userbase WHERE userID = " + str(userID)
+            mycursor.execute(Q)
+            cls()
+            print("Welcome, ", mycursor.fetchone()[0], ".", sep = "")
+            printHeader("Booking a Ticket")
 
-        print("Enter Age: ")
-        userAge = input("-> ")
-        
-        print("Enter Gender(M/F/O)")
-        userGender = input("-> ").upper()
-
-        print("Enter Phone number: ")
-        userPhone = input("-> ")
-
-        print("Enter e-mail: ")
-        userEmail = input("-> ")
-
-        print("Enter City: ")
-        userCity = input("-> ")
-
-        createUserRecord(userName, userAge, userGender, userPhone, userEmail, userCity)
-
-        mycursor.execute("SELECT userID FROM userbase")
+            bookTicket(id)
+            return 0
+        else:
+            cls()
+            print("Please select from y/n")
+            mainMenu()
+            return 0
+    except:
         cls()
-        print("User Added Sucessfully")
-        print("IMPORTANT: Your User ID is", mycursor.fetchall()[-1][0])
-        bookTicket(id)
+        print("Something went worng. Please try again later.")
+        mainMenu()
         return 0
-    
-    elif x.lower() == 'n':
-        print("Enter your ID")
-        userID = int(input("-> "))
-        
-        Q = "SELECT name from userbase WHERE userID = " + str(userID)
-        mycursor.execute(Q)
-        cls()
-        print("Welcome, ", mycursor.fetchone()[0], ".", sep = "")
-        printHeader("Booking a Ticket")
 
-        bookTicket(id)
-        return 0
+
+
 
 
 def bookTicket(id):
 
-    
-    printMovies()
-    print("Enter Movie ID")
-    movieID = int(input("-> "))
+    try:
+        printMovies()
+        print("Enter Movie ID")
+        movieID = int(input("-> "))
 
-    print("Enter Date: ")
-    movieDate = input("-> ")
+        print("Enter Date: ")
+        movieDate = input("-> ")
 
-    seat = ['Normal', 'Executive', 'Luxury']
+        seat = ['Normal', 'Executive', 'Luxury']
 
-    print("Select seat type: ")
-    print("     Press 1 for Normal(Rs. 100)")
-    print("     Press 2 for Executive(Rs 250)")
-    print("     Press 3 for Luxury(Rs 500)")
+        print("Select seat type: ")
+        print("     Press 1 for Normal(Rs. 100)")
+        print("     Press 2 for Executive(Rs 250)")
+        print("     Press 3 for Luxury(Rs 500)")
 
-    movieSeat = int(input("->"))
+        movieSeat = int(input("->"))
 
-    print("Enter Start Time: ")
-    movieTiming = input("-> ")
+        print("Enter Start Time: ")
+        movieTiming = input("-> ")
 
-    theatre =  ['INOX', 'PVR', 'Cinepolis', 'Carnival']
+        theatre =  ['INOX', 'PVR', 'Cinepolis', 'Carnival']
 
-    print("Do you want refreshments(y/n): ")
-    refreshment = input("-> ")
+        print("Do you want refreshments(y/n): ")
+        refreshment = input("-> ")
 
-    print("Select Theatre: ")
-    for i in range(len(theatre)):
-        print("     Press", i + 1, "for", theatre[i])
-    
-    movieTheatre = int(input("-> "))
+        print("Select Theatre: ")
+        for i in range(len(theatre)):
+            print("     Press", i + 1, "for", theatre[i])
+        
+        movieTheatre = int(input("-> "))
 
-    print("Enter City: ")
-    movieCity = input("-> ")
+        print("Enter City: ")
+        movieCity = input("-> ")
 
-    createTicketRecord(movieID, id, movieSeat, movieTiming, movieTheatre,movieCity, refreshment)
-    return 0
-
+        createTicketRecord(movieID, id, movieSeat, movieTiming, movieTheatre,movieCity, refreshment)
+        return 0
+    except:
+        cls()
+        print('Something went wrong.  Please try again later.')
+        mainMenu()
+        return 0
 
 
 
@@ -752,6 +823,7 @@ def mainMenu():
 
     elif mainMenuInput == '3':
         if signIn():
+            cls()
             print("Welcome to Admin")
             adminFunctions()
         else:

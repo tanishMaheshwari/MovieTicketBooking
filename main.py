@@ -4,6 +4,7 @@
     
     To D0:
         Looking For Bugs
+        ticket book request not reaching database
 
 
 '''
@@ -27,12 +28,17 @@ print("Enter password: \n->", end='')
 password = gp.getpass(prompt='')
 
 
+ip = 'localhost'
+userName = 'tanish'
+password = 'admin'
+
 try:
     db = mysql.connector.connect(
         host = ip, #localhost
         user = userName, #tanish
         passwd = password, #admin
         database = 'movieTicketBooking'
+        
     )
     print('*' * 25 + '\nAcess Granted. WELCOME\n' + '*' * 25)
 except:
@@ -431,14 +437,14 @@ def printTicketBase():
 
     
     
-    print('┌──────┬' + '─' * (maxNameLen + 2) + '┬' + '─' * maxMovieLen + '┬' + '─' * maxSeatLen + '┬' + '─' * maxDateLen + '┬' + '─' * 10 + '┬' + '─' * maxTheatreLen + '┬' + '─' * maxCityLen + '┬' + '─' * 14 + '┐')
+    print('┌──────┬' + '─' * (maxNameLen + 2) + '┬' + '─' * maxMovieLen + '┬' + '─' * max(11, maxSeatLen) + '┬' + '─' * maxDateLen + '┬' + '─' * 10 + '┬' + '─' * maxTheatreLen + '┬' + '─' * maxCityLen + '┬' + '─' * 14 + '┐')
     print('│ S.No │ Name' + ' ' * (maxNameLen - 4) + ' | Movie Name' + ' ' * (maxMovieLen - 12) +  ' | Seat Type' + ' ' * (maxSeatLen - 11) + ' | Date     | Timing   | Theatre' + ' ' * (maxTheatreLen - 9) + ' | City' + ' ' * (maxCityLen - 6) + ' | Refreshments |')
 
     for i in range(len(Users)):
         print('├──────┼' + '─' * (maxNameLen + 2) + '┼' + '─' * maxMovieLen + '┼' + '─' * maxSeatLen + '┼' + '─' * maxDateLen + '┼' + '─' * 10 + '┼' + '─' * maxTheatreLen + '┼' + '─' * maxCityLen + '┼' + '─' * 14 + '┤')
         print('| ' + str(i + 1) + ' ' * (4 - len(str(i + 1))) + ' | ' + str(Users[i]) + ' ' * (maxNameLen - len(str(Users[i]))) + ' | ' + Movies[i] + ' ' * (maxMovieLen - len(str(Movies[i])) - 2) + ' | ' + str(seatType[i]) + ' ' * (maxSeatLen - len(str(seatType[i])) - 2) + ' | ' + str(movieDate[i]) + ' ' * (maxDateLen - len(str(movieDate[i])) - 2) + ' | ' + str(timing[i]) + ' ' * (maxTimingLen - len(str(timing[i])) - 2) + '| ' + str(theatre[i]) + ' ' * (maxTheatreLen - len(str(theatre[i])) - 2) + ' | ' + str(city[i]) + ' ' * (maxCityLen - len(str(city[i])) - 2) + ' | ' + str(refreshment[i]) + ' ' * 11 + ' | ')
 
-    print('└──────┴' + '─' * (maxNameLen + 2) + '┴' + '─' * maxMovieLen + '┴' + '─' * maxSeatLen + '┴' + '─' * maxDateLen + '┴' + '─' * 10 + '┴' + '─' * maxTheatreLen + '┴' + '─' * maxCityLen + '┴' + '─' * 14 + '┘')
+    print('└──────┴' + '─' * (maxNameLen + 2) + '┴' + '─' * maxMovieLen + '┴' + '─' * max(11, maxSeatLen) + '┴' + '─' * maxDateLen + '┴' + '─' * 10 + '┴' + '─' * maxTheatreLen + '┴' + '─' * maxCityLen + '┴' + '─' * 14 + '┘')
 
 
 def adminFunctions():
@@ -502,7 +508,8 @@ def adminFunctions():
             try:
                 print("Enter S.No of the Movie record you want to edit")
                 y = int(input("-> "))
-                print("Which field do you want to edit Eg: age")
+                print("Which field do you want to edit")
+                print("NOTE: Fields are: name, lastDate, basePrice, details, ticketSold")
                 z = input("-> ")
                 print("Enter New Value")
                 g = input("-> ")
@@ -543,12 +550,12 @@ def adminFunctions():
         
         if x == 1:
             print("Enter details in the following format: ")
-            print("(<name>, <age>, <gender>, <phone number>, <email>, <city>)")
+            print("(<movieID>, <userID>, <seatType>, <movieDate>, <timing>, <theatre>, <city>, <refreshment>)")
             print("NOTE: put strings in ''") 
             try:
                 y = eval(input("-> "))
 
-                createUserRecord(y[0], y[1], y[2], y[3], y[4], y[5])
+                createUserRecord(y[0], y[1], y[2], y[3], y[4], y[5], y[6], y[7])
                 cls()
                 print("Ticket Record added sucessfully.")
                 adminFunctions()
@@ -578,6 +585,7 @@ def adminFunctions():
                 print("Enter Record Number: ")
                 y = int(input("-> "))
                 print("Enter Field: ")
+                print("NOTE\nFields are: movieID, userID, seatType, movieDate, timing, theatre, city, refreshment")
                 z = input("-> ")
                 print("Enter Value: ")
                 aa = input("-> ")

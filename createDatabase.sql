@@ -1,8 +1,6 @@
 create database movieTicketBase;
 
-create table userBase;
-create table ticketBase;
-create table movieBase;
+
 
 CREATE TABLE userBase (
 	userID SMALLINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -25,11 +23,11 @@ CREATE TABLE ticketBase(
     city VARCHAR(25),
     refreshment CHAR(1)
 );
-CREATE TABLE ticketbase(
+CREATE TABLE moviebase(
 	movieID int primary key not null auto_increment,
     name varchar(20),
     lastDate varchar(10),
     basePrice smallint,
     details varchar(50),
     ticketSold int
-    );
+);

@@ -1,8 +1,8 @@
 create database movieTicketBase;
+use movieticketbooking;
 
 
-
-CREATE TABLE userBase (
+CREATE TABLE userbase (
 	userID SMALLINT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     name VARCHAR(25) NOT NULL,
     age SMALLINT UNSIGNED NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE userBase (
     city VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE ticketBase(
+CREATE TABLE ticketbase(
 	ticketID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     movieID SMALLINT ,
 	userID SMALLINT,

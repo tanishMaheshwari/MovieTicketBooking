@@ -1,4 +1,3 @@
-'''ticket book request not reaching database'''
 import mysql.connector
 import os
 from datetime import datetime
@@ -6,15 +5,12 @@ from datetime import datetime
 print("Starting up...\n")
 print("Date: ", datetime.now().strftime("%d/%m/%Y %H:%M:%S"))
 print("\n" + "*" * 25 )
-# print("Enter server IP: ")
-# ip = input("-> ")
-# print("Enter username: ")
-# userName = input("-> ")
-# print("Enter password:")
-# password = input('-> ')
-ip = 'localhost'
-userName = 'tanish'
-password = 'admin'
+print("Enter server IP: ")
+ip = input("-> ")
+print("Enter username: ")
+userName = input("-> ")
+print("Enter password:")
+password = input('-> ')
 try:
     db = mysql.connector.connect(
         host = ip, #localhost
@@ -208,22 +204,15 @@ def printTicketBase():
     refreshment = list(cur)
     refreshment = [refreshment[i][0] for i in range((len(refreshment)))]
     Users = []
-    for i in range(len(userID)):
-        Q = "SELECT userID FROM ticketbase WHERE ticketID = " + str(i + 1)
-        cur.execute(Q)
-        ID = cur.fetchone()[0]
-        Q = "SELECT name FROM userbase WHERE userID = " + str(ID)
-        cur.execute(Q)
-        Users.append(cur.fetchone()[0])
+    cur.execute("Select ticketID from  ticketbase;")
+    asd = cur.fetchall()
+    asdf = [asd[i][0] for i in range(len(asd))]
+    cur.execute("select name from userbase, ticketbase where userbase.userid = ticketbase.userid") 
+    Users = [i[0] for i in cur.fetchall()]
     Movies = []
-    for i in range(len(movieID)):
-        Q = "SELECT movieID FROM ticketbase WHERE ticketID = " + str(i + 1)
-        cur.execute(Q)
-        ID = cur.fetchone()[0]
-        Q = "SELECT name FROM moviebase WHERE movieID = " + str(ID)
-        cur.execute(Q)
-        Movies.append(cur.fetchone()[0])
-    maxMovieLen = 12
+    cur.execute('select name from moviebase, ticketbase where moviebase.movieid = ticketbase.movieid;')
+    Movies = [i[0] for i in cur.fetchall()]
+    maxMovieLen = 14
     for i in range(len(Movies)):
         if len(Movies[i]) > maxMovieLen:
             maxMovieLen = len(Movies[i]) + 2
@@ -231,7 +220,7 @@ def printTicketBase():
     for i in range(len(Users)):
         if len(Users[i]) > maxNameLen:
             maxNameLen = len(Users[i]) + 2
-    maxSeatLen = 6
+    maxSeatLen = 11
     for i in range(len(seatType)):
         if len(seatType[i]) > maxSeatLen:
             maxSeatLen = len(seatType[i]) + 2

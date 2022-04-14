@@ -630,5 +630,6 @@ def mainMenu():
 
 #=======            DRIVER CODE         =======
 
-#mainMenu()
+mainMenu()
+
 
